@@ -47,7 +47,15 @@ def create_pdf(text: str) -> bytes:
     lines = text.split("\n")
     for line in lines:
         wrapped_line = wrapper.fill(line)
-        text_object.textLines(wrapped_line)
+
+        segments = re.split(r"(\p{Emoji})", wrapped_line, flags=re.UNICODE)
+        for segment in segments:
+            if re.match(r"\p{Emoji}", segment, flags=re.UNICODE):
+                pdf.setFont("NotoEmoji-Regular", 12, "NotoEmoji-Regular.ttf")
+            else:
+                pdf.setFont("Helvetica", 12)
+                text_object.textOut(segment)
+        text_object.textLine()
 
     pdf.drawText(text_object)
     pdf.showPage()
