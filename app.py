@@ -36,7 +36,7 @@ def create_pdf(text: str) -> bytes:
     pdf.add_page()
     pdf.set_font("Arial", size=12)
     pdf.multi_cell(0, 10, text)
-    pdf_out = pdf.output(dest='S').encode('latin1')
+    pdf_out = pdf.output(dest='S').encode('latin1', 'replace')  # Replace the characters that cannot be encoded
     return pdf_out
 
 def download_button(file_data, file_name, button_text):
