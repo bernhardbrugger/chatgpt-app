@@ -10,16 +10,15 @@ load_dotenv()
 openai.organization = "org-HgO75LNERg28F4GqsY4AbfzW"
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
-# Streamlit app layout
-st.title("Chat with GPT-4")
-user_message = st.text_input("Enter your message:")
+user_message = st.text_area("Enter your message:", height=100)
 
 if st.button("Send"):
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "user", "content": user_message}
-        ]
-    )
+    with st.spinner('Processing...'):  # Loading animation
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": user_message}
+            ]
+        )
 
-    st.write(completion.choices[0].message["content"])  
+    st.write(completion.choices[0].message["content"])
