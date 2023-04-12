@@ -18,4 +18,4 @@ if st.button("Send"):
         ]
     )
 
-    st.write(completion.choices[0].message["content"]) 
+    st.write(completion.choices[0].message["content"])  
