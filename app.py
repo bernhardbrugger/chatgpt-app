@@ -5,11 +5,6 @@ from dotenv import load_dotenv
 
 # Load environment variables from the .env file
 load_dotenv()
-# Debug print
-print(f"Organization ID: {os.getenv('__ORGANIZATION_ID')}")
-print(type(os.getenv('__ORGANIZATION_ID')))
-print(f"API Key: {os.getenv('__API_KEY')}")
-print(type(os.getenv('__API_KEY')))
 
 # Credentials
 openai.organization = os.getenv("__ORGANIZATION_ID")
