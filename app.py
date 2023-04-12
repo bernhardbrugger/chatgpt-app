@@ -9,6 +9,7 @@ from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfgen import canvas
 import textwrap
 import re
+import emoji
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -40,7 +41,6 @@ def create_pdf(text: str) -> bytes:
     buffer = BytesIO()
     pdf = canvas.Canvas(buffer, pagesize=A4)
 
-    pdf.setFont("Helvetica", 12)
     text_object = pdf.beginText(10, 800)  # 10mm from the left, 800mm from the top
     text_object.setFillColor("black")
 
@@ -49,13 +49,13 @@ def create_pdf(text: str) -> bytes:
     for line in lines:
         wrapped_line = wrapper.fill(line)
 
-        segments = re.split(r"(\p{Emoji})", wrapped_line, flags=re.UNICODE)
+        segments = emoji.get_emoji_regexp().split(wrapped_line)
         for segment in segments:
-            if re.match(r"\p{Emoji}", segment, flags=re.UNICODE):
+            if emoji.emoji_count(segment) > 0:
                 pdf.setFont("NotoEmoji-Regular", 12, "NotoEmoji-Regular.ttf")
             else:
                 pdf.setFont("Helvetica", 12)
-                text_object.textOut(segment)
+            text_object.textOut(segment)
         text_object.textLine()
 
     pdf.drawText(text_object)
