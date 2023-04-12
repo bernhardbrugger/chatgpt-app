@@ -10,6 +10,7 @@ load_dotenv()
 openai.organization = "org-HgO75LNERg28F4GqsY4AbfzW"
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
+st.title("Chat with ChatGPT")
 user_message = st.text_area("Enter your message:", height=100)
 
 if st.button("Send"):
