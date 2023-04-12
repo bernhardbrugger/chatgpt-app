@@ -32,12 +32,23 @@ if st.button("Send"):
     st.write(response)
 
 def create_pdf(text: str) -> bytes:
-    pdf = FPDF(orientation='P', unit='mm', format='A4')
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, text)
-    pdf_out = pdf.output(dest='S').encode('latin1', 'replace')  # Replace the characters that cannot be encoded
-    return pdf_out
+    buffer = BytesIO()
+    pdf = canvas.Canvas(buffer, pagesize=A4)
+
+    pdf.setFont("Helvetica", 12)
+    text_object = pdf.beginText(10, 800)  # 10mm from the left, 800mm from the top
+    text_object.setFillColor("black")
+
+    lines = text.split("\n")
+    for line in lines:
+        text_object.textLine(line)
+
+    pdf.drawText(text_object)
+    pdf.showPage()
+    pdf.save()
+    
+    buffer.seek(0)
+    return buffer.read()
 
 def download_button(file_data, file_name, button_text):
     b64 = base64.b64encode(file_data).decode()
