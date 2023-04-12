@@ -4,3 +4,4 @@ python-dotenv==1.0.0
 fpdf2==2.7.3
 pybase64==1.2.3
 reportlab==3.6.12
+textwrap3==0.9.2
