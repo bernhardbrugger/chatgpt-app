@@ -42,21 +42,18 @@ def create_pdf(text: str) -> bytes:
     text_object = pdf.beginText(10, 800)  # 10mm from the left, 800mm from the top
     text_object.setFillColor("black")
 
+    wrapper = textwrap.TextWrapper(width=100)  # Adjust the width as needed
     lines = text.split("\n")
     for line in lines:
-        text_object.textLine(line)
+        wrapped_line = wrapper.fill(line)
+        text_object.textLines(wrapped_line)
 
     pdf.drawText(text_object)
     pdf.showPage()
     pdf.save()
-    
+
     buffer.seek(0)
     return buffer.read()
-
-def download_button(file_data, file_name, button_text):
-    b64 = base64.b64encode(file_data).decode()
-    href = f'<a href="data:application/octet-stream;base64,{b64}" download="{file_name}">{button_text}</a>'
-    st.markdown(href, unsafe_allow_html=True)
 
 if response:
     # PDF Download
