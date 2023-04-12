@@ -10,9 +10,13 @@ load_dotenv()
 openai.organization = "org-HgO75LNERg28F4GqsY4AbfzW"
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
-st.title("Chat with ChatGPT")
+# Streamlit app layout
+st.title("Chat with GPT-4")
+
+# Use 'st.text_area' for a larger input field
 user_message = st.text_area("Enter your message:", height=100)
 
+response = None
 if st.button("Send"):
     with st.spinner('Processing...'):  # Loading animation
         completion = openai.ChatCompletion.create(
@@ -22,4 +26,23 @@ if st.button("Send"):
             ]
         )
 
-    st.write(completion.choices[0].message["content"])
+    response = completion.choices[0].message["content"]
+    st.write(response)
+
+def create_pdf(text: str) -> bytes:
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    pdf.multi_cell(0, 10, text)
+    pdf_out = pdf.output(dest='S').encode('latin1')
+    return pdf_out
+
+def download_button(file_data, file_name, button_text):
+    b64 = base64.b64encode(file_data).decode()
+    href = f'<a href="data:application/octet-stream;base64,{b64}" download="{file_name}">{button_text}</a>'
+    st.markdown(href, unsafe_allow_html=True)
+
+if response:
+    # PDF Download
+    pdf_data = create_pdf(response)
+    download_button(pdf_data, "generated_text.pdf", "Download as PDF")
