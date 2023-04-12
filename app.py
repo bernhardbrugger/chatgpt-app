@@ -2,6 +2,8 @@ import streamlit as st
 import os
 import openai
 from dotenv import load_dotenv
+from fpdf import FPDF
+import base64
 
 # Load environment variables from the .env file
 load_dotenv()
