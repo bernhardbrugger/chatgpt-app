@@ -1,10 +1,11 @@
 import streamlit as st
 import os
 import openai
-from dotenv import load_dotenv
 
-# Load environment variables from the .env file
-load_dotenv()
+
+openai.organization = os.getenv("org-HgO75LNERg28F4GqsY4AbfzW")
+openai.api_key = os.getenv("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")
+
 
 # Credentials
 openai.organization = os.getenv("__ORGANIZATION_ID")
