@@ -4,7 +4,7 @@ import openai
 
 # Credentials
 openai.organization = "org-HgO75LNERg28F4GqsY4AbfzW"
-openai.api_key = {{ secrets.OPENAI_API_KEY }}
+openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 # Streamlit app layout
 st.title("Chat with GPT-4")
