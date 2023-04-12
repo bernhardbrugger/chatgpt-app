@@ -56,6 +56,11 @@ def create_pdf(text: str) -> bytes:
     buffer.seek(0)
     return buffer.read()
 
+def download_button(file_data, file_name, button_text):
+    b64 = base64.b64encode(file_data).decode()
+    href = f'<a href="data:application/octet-stream;base64,{b64}" download="{file_name}">{button_text}</a>'
+    st.markdown(href, unsafe_allow_html=True)
+
 if response:
     # PDF Download
     pdf_data = create_pdf(response)
