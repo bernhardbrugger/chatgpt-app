@@ -32,7 +32,7 @@ if st.button("Send"):
     st.write(response)
 
 def create_pdf(text: str) -> bytes:
-    pdf = FPDF()
+    pdf = FPDF(orientation='P', unit='mm', format='A4')
     pdf.add_page()
     pdf.set_font("Arial", size=12)
     pdf.multi_cell(0, 10, text)
