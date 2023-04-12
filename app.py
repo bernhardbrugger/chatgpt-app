@@ -7,6 +7,7 @@ import base64
 from io import BytesIO
 from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfgen import canvas
+import textwrap
 
 # Load environment variables from the .env file
 load_dotenv()
