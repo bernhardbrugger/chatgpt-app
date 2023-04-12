@@ -4,6 +4,7 @@ import openai
 from dotenv import load_dotenv
 from fpdf import FPDF
 import base64
+from io import BytesIO
 
 # Load environment variables from the .env file
 load_dotenv()
