@@ -49,9 +49,9 @@ def create_pdf(text: str) -> bytes:
     for line in lines:
         wrapped_line = wrapper.fill(line)
 
-        segments = emoji.get_emoji_regexp().split(wrapped_line)
+        segments = emoji.emojize(wrapped_line)
         for segment in segments:
-            if emoji.emoji_count(segment) > 0:
+            if re.match(emoji.get_emoji_regexp(), segment):
                 pdf.setFont("NotoEmoji-Regular", 12, "NotoEmoji-Regular.ttf")
             else:
                 pdf.setFont("Helvetica", 12)
