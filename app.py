@@ -11,6 +11,8 @@ import textwrap
 import re
 import emoji
 from ttfquery import describe
+from reportlab.pdfbase import pdfmetrics
+
 
 # Load environment variables from the .env file
 load_dotenv()
