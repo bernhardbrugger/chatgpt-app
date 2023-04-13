@@ -46,8 +46,7 @@ EMOJI_PATTERN = re.compile(
 # Register the Noto Emoji font
 noto_emoji_font = "NotoEmoji-Regular.ttf"
 face = describe.openFont(noto_emoji_font)
-pdfmetrics.registerFont(TTFont(face.family, noto_emoji_font))
-
+pdfmetrics.registerFont(TTFont("NotoEmoji", noto_emoji_font))
 
 response = None
 if st.button("Send"):
@@ -77,7 +76,7 @@ def create_pdf(text: str) -> bytes:
         segments = emoji.emojize(wrapped_line)
         for segment in segments:
             if re.match(EMOJI_PATTERN, segment):
-                pdf.setFont(face.familyname, 12)
+                pdf.setFont("NotoEmoji", 12)
             else:
                 pdf.setFont("Helvetica", 12)
             text_object.textOut(segment)
@@ -89,6 +88,7 @@ def create_pdf(text: str) -> bytes:
 
     buffer.seek(0)
     return buffer.read()
+
 
 def download_button(file_data, file_name, button_text):
     b64 = base64.b64encode(file_data).decode()
