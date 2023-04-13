@@ -10,6 +10,7 @@ from reportlab.pdfgen import canvas
 import textwrap
 import re
 import emoji
+from ttfquery import describe
 
 # Load environment variables from the .env file
 load_dotenv()
