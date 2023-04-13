@@ -39,6 +39,12 @@ EMOJI_PATTERN = re.compile(
     "]+"
 )
 
+# Register the Noto Emoji font
+noto_emoji_font = "NotoEmoji-Regular.ttf"
+face = describe.openFont(noto_emoji_font)
+pdfmetrics.registerFont(TTFont(face.familyname, noto_emoji_font))
+
+
 response = None
 if st.button("Send"):
     with st.spinner('Processing...'):  # Loading animation
@@ -67,7 +73,7 @@ def create_pdf(text: str) -> bytes:
         segments = emoji.emojize(wrapped_line)
         for segment in segments:
             if re.match(EMOJI_PATTERN, segment):
-                pdf.setFont("NotoEmoji-Regular", 12, "NotoEmoji-Regular.ttf")
+                pdf.setFont(face.familyname, 12)
             else:
                 pdf.setFont("Helvetica", 12)
             text_object.textOut(segment)
