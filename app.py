@@ -46,7 +46,7 @@ EMOJI_PATTERN = re.compile(
 # Register the Noto Emoji font
 noto_emoji_font = "NotoEmoji-Regular.ttf"
 face = describe.openFont(noto_emoji_font)
-pdfmetrics.registerFont(TTFont(face.familyname, noto_emoji_font))
+pdfmetrics.registerFont(TTFont(face.family, noto_emoji_font))
 
 
 response = None
