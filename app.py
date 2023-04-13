@@ -12,6 +12,7 @@ import re
 import emoji
 from ttfquery import describe
 from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
 
 # Load environment variables from the .env file
