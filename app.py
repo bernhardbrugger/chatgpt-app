@@ -23,7 +23,7 @@ openai.organization = "org-HgO75LNERg28F4GqsY4AbfzW"
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Streamlit app layout
-st.title("Chat with GPT-4")
+st.title("Ask me anything")
 
 user_message = st.text_area("Enter your message:", height=None)
 
