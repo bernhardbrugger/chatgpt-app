@@ -25,40 +25,7 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 # Streamlit app layout
 st.title("Chat with GPT-4")
 
-st.markdown(
-    """
-<style>
-.auto-grow-textarea {
-    min-height: 50px;
-    max-height: 300px;
-    resize: none;
-    overflow: hidden;
-}
-</style>
-""",
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    """
-<script>
-    function auto_grow(element) {
-        element.style.height = "5px";
-        element.style.height = (element.scrollHeight)+"px";
-    }
-</script>
-""",
-    unsafe_allow_html=True,
-)
-
-user_message = st.text_input("Enter your message:")
-
-text_area = st.markdown(
-    f"""
-<textarea class="auto-grow-textarea" oninput="auto_grow(this)" rows="1" style="width:100%;">{user_message}</textarea>
-""",
-    unsafe_allow_html=True,
-)
+user_message = st.text_area("Enter your message:", height=None)
 
 EMOJI_PATTERN = re.compile(
     "[\U0001F1E0-\U0001F1FF"  # flags (iOS)
