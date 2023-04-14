@@ -26,7 +26,7 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 st.title("Chat with GPT-4")
 
 # Use 'st.text_area' for a larger input field
-user_message = st.text_area("Enter your message:", height=100)
+user_message = st.text_area("Enter your message:", height=None)
 
 EMOJI_PATTERN = re.compile(
     "[\U0001F1E0-\U0001F1FF"  # flags (iOS)
