@@ -100,7 +100,8 @@ def create_download_link(text: str, filename: str = "generated_text.txt") -> str
 def download_button(file_data, file_name, button_text):
     b64 = base64.b64encode(file_data).decode()
     href = f'<a href="data:application/octet-stream;base64,{b64}" download="{file_name}">{button_text}</a>'
-    st.markdown(create_download_link(generated_text), unsafe_allow_html=True)
+    st.markdown(create_download_link(text), unsafe_allow_html=True)
+
 
 if response:
     # PDF Download
