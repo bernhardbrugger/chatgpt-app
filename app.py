@@ -89,11 +89,18 @@ def create_pdf(text: str) -> bytes:
     buffer.seek(0)
     return buffer.read()
 
+def create_text_file(text: str) -> str:
+    return text
+
+def create_download_link(text: str, filename: str = "generated_text.txt") -> str:
+    b64 = base64.b64encode(text.encode()).decode()  # Encode the text to base64
+    href = f'<a href="data:text/plain;base64,{b64}" download="{filename}">Download as .txt file</a>'
+    return href
 
 def download_button(file_data, file_name, button_text):
     b64 = base64.b64encode(file_data).decode()
     href = f'<a href="data:application/octet-stream;base64,{b64}" download="{file_name}">{button_text}</a>'
-    st.markdown(href, unsafe_allow_html=True)
+    st.markdown(create_download_link(generated_text), unsafe_allow_html=True)
 
 if response:
     # PDF Download
